@@ -6,6 +6,11 @@
   <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.js"></script>
   <script src="index.js" defer></script>
+  <style>
+    .strike {
+      text-decoration: line-through;
+    }
+  </style>
 </head>
 <body>
   <div id="vue-app">
@@ -19,10 +24,17 @@
 <template id="home-page">
   <div class="vue-component">
     <ul>
-      <li v-for="task in tasks" v-on:click="deleteTask(task)">
+      <li v-for="task in tasks" v-on:click="toggleComplete(task)" v-bind:class="{strike: task.completed}">
         {{ task.text }}
       </li>
     </ul>
+
+    <div>
+      Completed Tasks: {{ numberOfCompletedTasks() }}
+    </div>
+    <div>
+      <button v-on:click="removeCompletedTasks()">Clear Completed</button>
+    </div>
 
     <h4>Add a New Task</h4>
     <div>

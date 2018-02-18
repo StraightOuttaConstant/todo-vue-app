@@ -27,9 +27,26 @@ var HomePage = {
         this.newTask = {text: "", completed: false};
       }
     },
-    deleteTask: function(task) {
-      var index = this.tasks.indexOf(task);
-      this.tasks.splice(index,1);
+    toggleComplete: function(task) {
+      task.completed = !task.completed;
+    },
+    numberOfCompletedTasks: function() {
+      var count = 0;
+      this.tasks.forEach(function(task) {
+        if (task.completed) {
+          count++;
+        }
+      });
+      return count;
+    },
+    removeCompletedTasks: function() {
+      var uncompletedTasks = [];
+      this.tasks.forEach(function(task) {
+        if (!task.completed) {
+          uncompletedTasks.push(task);
+        }
+      });
+      this.tasks = uncompletedTasks;
     }
   },
   computed: {}
